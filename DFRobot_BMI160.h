@@ -918,6 +918,7 @@ enum bmi160StepDetectMode {
 class DFRobot_BMI160{
 public:
   DFRobot_BMI160();
+  DFRobot_BMI160(int sda, int scl);  // ESP32 GPIO映射
   
   /**
    * @fn I2cInit
@@ -1028,6 +1029,26 @@ public:
    * @return BMI160_OK(0) measn succse
    */
   int8_t setStepPowerMode(uint8_t model);
+
+  /**
+  * @fn initialize
+  * @brief initialize gyro and acc
+   * @return void
+  **/
+  void initialize();
+
+  /**
+    * @fn getMotion6
+   * @brief get the 6 dof motion data
+   * @param ax Pointer to store accelerometer X axis raw data
+   * @param ay Pointer to store accelerometer Y axis raw data
+   * @param az Pointer to store accelerometer Z axis raw data
+   * @param gx Pointer to store gyroscope X axis raw data
+   * @param gy Pointer to store gyroscope Y axis raw data
+   * @param gz Pointer to store gyroscope Z axis raw data
+   * @return void
+  **/
+  void getMotion6(int16_t* ax, int16_t* ay, int16_t* az,int16_t* gx, int16_t* gy, int16_t* gz);
 
 
   uint8_t onlyAccel=1;
